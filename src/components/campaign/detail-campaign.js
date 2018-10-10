@@ -26,58 +26,6 @@ import configs from '../../configs';
 import classnames from 'classnames';
 import { compose, withProps, withState, withHandlers, mapProps } from "recompose";
 
-import {
-    withScriptjs,
-    withGoogleMap,
-    GoogleMap,
-    Marker,
-    InfoWindow,
-} from "react-google-maps";
-
-const MapWithControlledZoom = compose(
-    withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDNkOPnqtqo9kW7tsTNa2hJjTrkhgn_Z2Q&v=3.exp&libraries=geometry,drawing,places",
-        loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div style={{ height: `400px` }} />,
-        mapElement: <div style={{ height: `100%` }} />
-    }),
-    withState('zoom', 'onZoomChange', 12),
-    withHandlers(() => {
-        const refs = {
-            map: undefined,
-        }
-
-        return {
-            onMapMounted: () => ref => {
-                refs.map = ref
-            },
-            onZoomChanged: ({ onZoomChange }) => () => {
-                onZoomChange(refs.map.getZoom())
-            }
-        }
-    }),
-    withScriptjs,
-    withGoogleMap
-)((props) =>
-    <GoogleMap
-        defaultCenter={{ lat: props.longitude, lng: props.latitude }}
-        zoom={props.zoom}
-        ref={props.onMapMounted}
-        onZoomChanged={props.onZoomChanged}
-    >
-        <Marker
-            position={{ lat: props.longitude, lng: props.latitude }}
-            onClick={props.onToggleOpen}
-        >
-            <InfoWindow onCloseClick={props.onToggleOpen}>
-                <div>
-                    <strong>{props.company}</strong>
-                </div>
-            </InfoWindow>
-        </Marker>
-    </GoogleMap>
-);
-
 class DetailCampaign extends Component {
 	constructor(props) {
 	    super(props);
@@ -147,11 +95,7 @@ class DetailCampaign extends Component {
 		          <Col sm="5">
 		          	Maps
 		          	<div id="map">
-                        <MapWithControlledZoom
-                            longitude={Number("10.853219") || 0}
-                            latitude={Number("106.624157") || 0}
-                            company="TMA Solutions Lab 6"
-                        />
+                        
                     </div>
 		          </Col>
 		        </Row>
