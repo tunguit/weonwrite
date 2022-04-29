@@ -1,0 +1,24 @@
+<nb-card size="giant">
+
+  <nb-card-header>
+    Thuốc lá điện tử Sài Gòn | @blackbaby.bydinhthanhtam
+  </nb-card-header>
+
+  <div class="grid-container">
+
+    <div class="single-view" *ngIf="isSingleView">
+      <div class="camera" [style.background-image]="'url(' + selectedCamera.source + ')'">
+        <span class="camera-name">{{ selectedCamera.title }}</span>
+      </div>
+    </div>
+
+    <div class="grid-view" *ngIf="!isSingleView">
+      <div class="camera"
+           *ngFor="let camera of cameras"
+           [style.background-image]="'url(' + camera.source + ')'">
+        <span class="camera-name">{{ camera.title }}</span>
+      </div>
+    </div>
+
+  </div>
+</nb-card>
